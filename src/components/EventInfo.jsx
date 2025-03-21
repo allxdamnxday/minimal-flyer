@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 const EventInfo = () => {
   return (
     <motion.div
-      className="absolute bottom-8 sm:bottom-10 left-0 right-0 text-center font-space-grotesk text-xs sm:text-sm tracking-wider font-light z-10 footer px-2"
+      className="absolute bottom-16 sm:bottom-16 md:bottom-12 left-0 right-0 text-center font-space-grotesk text-xs sm:text-sm tracking-wider font-light z-20 footer px-2 py-2 bg-black bg-opacity-30 backdrop-blur-sm"
       initial={{ opacity: 0, y: 10 }}
       animate={{ 
-        opacity: 0.5,
+        opacity: 0.8,
         y: [0, -8, 0],
       }}
       transition={{ 
@@ -23,7 +23,7 @@ const EventInfo = () => {
       }}
       whileHover={{ 
         scale: 1.02,
-        opacity: 0.8,
+        opacity: 1,
         textShadow: "0 0 5px rgba(255, 255, 255, 0.4)",
         y: 0
       }}
