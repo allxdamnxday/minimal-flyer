@@ -6,12 +6,13 @@ const Flyer = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isLoading, setIsLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [windowSize, setWindowSize] = useState({ 
     width: typeof window !== 'undefined' ? window.innerWidth : 0, 
     height: typeof window !== 'undefined' ? window.innerHeight : 0 
   });
 
-  // Track mouse position for parallax effect
+  // Track mouse position for parallax effect and detect mobile
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({
@@ -21,11 +22,15 @@ const Flyer = () => {
     };
 
     const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight
-      });
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      
+      setWindowSize({ width, height });
+      setIsMobile(width < 768);
     };
+
+    // Run once to detect mobile
+    handleResize();
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('resize', handleResize);
@@ -59,16 +64,15 @@ const Flyer = () => {
       <motion.div
         className="relative overflow-hidden rounded-md shadow-flyer cursor-pointer"
         animate={{ 
-          scale: isHovered ? 1.02 : 1.05,
+          scale: isHovered ? 1.02 : isMobile ? [1.02, 1.055, 1.02] : [1.03, 1.06, 1.03],
           rotateX: isHovered ? 0 : mousePosition.y * 5,
           rotateY: isHovered ? 0 : mousePosition.x * -5,
           z: isHovered ? 20 : 0
         }}
         transition={{ 
           scale: {
-            duration: isHovered ? 0.5 : 30,
+            duration: isHovered ? 0.5 : isMobile ? 12 : 15,
             repeat: isHovered ? 0 : Infinity,
-            repeatType: "reverse",
             ease: isHovered ? "easeOut" : "easeInOut"
           },
           rotateX: {
@@ -113,16 +117,39 @@ const Flyer = () => {
           animate={{
             backgroundImage: isHovered 
               ? 'radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%)' 
-              : 'none'
+              : isMobile
+                ? 'radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%)'
+                : 'none',
+            opacity: isMobile && !isHovered ? [0.3, 0.4, 0.3] : undefined
+          }}
+          transition={{
+            opacity: {
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
           }}
         />
         
         {/* Subtle vignette effect */}
-        <div className="absolute inset-0 z-[9] pointer-events-none" 
-          style={{
-            boxShadow: 'inset 0 0 100px rgba(0,0,0,0.5)',
-            opacity: isHovered ? 0.3 : 0.7,
-            transition: 'opacity 0.5s ease'
+        <motion.div 
+          className="absolute inset-0 z-[9] pointer-events-none" 
+          animate={{
+            boxShadow: isMobile && !isHovered 
+              ? [
+                  'inset 0 0 90px rgba(0,0,0,0.6)', 
+                  'inset 0 0 110px rgba(0,0,0,0.5)', 
+                  'inset 0 0 90px rgba(0,0,0,0.6)'
+                ]
+              : 'inset 0 0 100px rgba(0,0,0,0.5)',
+            opacity: isHovered ? 0.3 : 0.6
+          }}
+          transition={{
+            boxShadow: {
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
           }}
         />
         
@@ -131,15 +158,14 @@ const Flyer = () => {
           alt="LEINK Solo Show - April 4, 2025"
           className="w-full h-auto"
           animate={{ 
-            scale: 1.05,
+            scale: isMobile && !isHovered ? [1.03, 1.06, 1.03] : 1.05,
             x: isHovered ? mousePosition.x * -10 : 0,
             y: isHovered ? mousePosition.y * -10 : 0
           }}
           transition={{ 
             scale: {
-              duration: 30, 
+              duration: isMobile ? 12 : 30, 
               repeat: Infinity, 
-              repeatType: "reverse",
               ease: "easeInOut"
             },
             x: {
@@ -154,18 +180,20 @@ const Flyer = () => {
           loading="eager"
         />
         
-        {/* Pulsing glow effect */}
+        {/* Subtle pulsing glow effect */}
         <motion.div 
           className="absolute inset-0 pointer-events-none z-[8]"
           animate={{
             boxShadow: isHovered 
               ? ['inset 0 0 30px rgba(255,255,255,0.1)', 'inset 0 0 50px rgba(255,255,255,0.2)', 'inset 0 0 30px rgba(255,255,255,0.1)']
-              : 'none'
+              : isMobile
+                ? ['inset 0 0 20px rgba(255,255,255,0.02)', 'inset 0 0 30px rgba(255,255,255,0.06)', 'inset 0 0 20px rgba(255,255,255,0.02)']
+                : 'none'
           }}
           transition={{
-            duration: 2,
+            duration: isMobile ? 12 : 2,
             repeat: Infinity,
-            repeatType: "reverse"
+            repeatType: "mirror"
           }}
         />
         
@@ -173,8 +201,17 @@ const Flyer = () => {
         <motion.div 
           className="absolute bottom-4 right-4 text-white font-space-grotesk text-sm tracking-widest z-20 bg-black bg-opacity-50 px-3 py-1 rounded-full"
           initial={{ opacity: 0 }}
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
+          animate={{ 
+            opacity: isHovered ? 1 : isMobile ? [0, 0.6, 0] : 0,
+            scale: 1
+          }}
+          transition={{ 
+            opacity: {
+              duration: isMobile && !isHovered ? 12 : 0.3,
+              repeat: isMobile && !isHovered ? Infinity : 0,
+              ease: "easeInOut"
+            }
+          }}
         >
           CLICK TO RSVP
         </motion.div>
