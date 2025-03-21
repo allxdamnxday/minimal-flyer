@@ -1,0 +1,21 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="32" height="32" rx="4" fill="black"/>
+  
+  <!-- Graffiti-style letter "J" -->
+  <path d="M20 8V20C20 20 20 24 16 24C12 24 12 20 12 20" 
+        stroke="white" 
+        stroke-width="2.5" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+  
+  <!-- Subtle drip effects -->
+  <path d="M16 24L16 28" 
+        stroke="white" 
+        stroke-width="2" 
+        stroke-linecap="round"/>
+  <path d="M13 24L13 26" 
+        stroke="white" 
+        stroke-width="2" 
+        stroke-linecap="round"/>
+</svg> 
