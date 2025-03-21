@@ -13,7 +13,7 @@ const Logo = () => {
         textShadow: "0 0 8px rgba(255, 255, 255, 0.5)"
       }}
     >
-      LEINK.ART
+      LEiNK.ART
     </motion.div>
   );
 };
