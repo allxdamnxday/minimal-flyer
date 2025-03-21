@@ -29,8 +29,8 @@ const Layout = ({ children }) => {
         <InstagramLink />
       </div>
       
-      {/* Main content area - adjusted to have padding at the bottom for footer */}
-      <div className="relative z-[10] h-full flex flex-col justify-center items-center px-4 pb-16">
+      {/* Main content area - removed the bottom padding as it's handled by RSVPButton */}
+      <div className="relative z-[10] h-full flex flex-col justify-center items-center px-4">
         {children}
       </div>
       

@@ -16,13 +16,13 @@ const RSVPButton = () => {
   };
 
   return (
-    <div className="mt-4 flex justify-center">
+    <div className="mt-4 mb-20 md:mb-24 lg:mb-28 flex justify-center">
       <motion.button
         className={`
           btn-shine relative 
           px-8 sm:px-10 md:px-12 
           py-2 sm:py-2.5 md:py-3 
-          border-1.5 sm:border-2 border-white 
+          border border-white sm:border-2
           rounded-full font-space-grotesk 
           tracking-widest 
           text-sm sm:text-base md:text-lg 
