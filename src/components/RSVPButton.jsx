@@ -16,7 +16,7 @@ const RSVPButton = () => {
   };
 
   return (
-    <div className="mt-4 mb-20 md:mb-24 lg:mb-28 flex justify-center">
+    <div className="mt-4 mb-8 sm:mb-12 md:mb-16 lg:mb-20 flex justify-center">
       <motion.button
         className={`
           btn-shine relative 
