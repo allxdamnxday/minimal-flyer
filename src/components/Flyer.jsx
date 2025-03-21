@@ -127,7 +127,7 @@ const Flyer = () => {
         />
         
         <motion.img
-          src="/Leink Art Show April 2025 SQ final revised LL.png"
+          src="/Leink Art Show.png"
           alt="LEINK Solo Show - April 4, 2025"
           className="w-full h-auto"
           animate={{ 
