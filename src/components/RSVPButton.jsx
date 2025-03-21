@@ -18,9 +18,18 @@ const RSVPButton = () => {
   return (
     <div className="mt-4 flex justify-center">
       <motion.button
-        className={`btn-shine relative px-12 py-3 border-2 border-white rounded-full font-space-grotesk tracking-widest text-lg uppercase bg-transparent ${
-          isLoading ? 'opacity-70' : 'opacity-100'
-        } rsvp-button animate-button-appear`}
+        className={`
+          btn-shine relative 
+          px-8 sm:px-10 md:px-12 
+          py-2 sm:py-2.5 md:py-3 
+          border-1.5 sm:border-2 border-white 
+          rounded-full font-space-grotesk 
+          tracking-widest 
+          text-sm sm:text-base md:text-lg 
+          uppercase bg-transparent 
+          ${isLoading ? 'opacity-70' : 'opacity-100'} 
+          rsvp-button animate-button-appear
+        `}
         onClick={handleClick}
         whileHover={{ 
           scale: 1.05,

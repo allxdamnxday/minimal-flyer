@@ -9,6 +9,12 @@ export default {
       fontFamily: {
         'space-grotesk': ['"Space Grotesk"', 'sans-serif'],
       },
+      spacing: {
+        '60px': '60px',
+        '70px': '70px',
+        '80px': '80px',
+        '100px': '100px',
+      },
       animation: {
         'pulse-slow': 'pulse 6s infinite',
         'zoom-slow': 'subtle-zoom 30s infinite alternate',
@@ -21,6 +27,9 @@ export default {
         'flyer': '0 5px 25px rgba(0, 0, 0, 0.5)',
         'flyer-glow': '0 5px 30px rgba(255, 255, 255, 0.2)',
         'button-glow': '0 0 20px rgba(255, 255, 255, 0.3)',
+      },
+      zIndex: {
+        '20': '20',  // Making sure z-index is defined
       },
     },
   },
